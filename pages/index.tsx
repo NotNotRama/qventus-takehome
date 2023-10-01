@@ -17,6 +17,9 @@ export default function Home() {
           'uppercaseLetter',
           'noConsecutiveLetters',
         ]}
+        fn={(data: Record<string, string>) => {
+          console.log('outside function', data);
+        }}
       />
     </>
   );

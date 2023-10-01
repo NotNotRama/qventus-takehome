@@ -39,8 +39,10 @@ const requirementsMap = {
 
 export default function PasswordValidator({
   requirements = [],
+  fn,
 }: {
   requirements?: (keyof typeof requirementsMap)[];
+  fn?: Function;
 }) {
   const { register, handleSubmit, watch } = useForm<FormInput>({
     criteriaMode: 'all',
@@ -68,7 +70,12 @@ export default function PasswordValidator({
     if (e.key === 'Enter') {
       e.preventDefault();
       console.log('Enter pressed');
+      handleSubmit(onSubmit)();
     }
+  }
+
+  function onSubmit(data: FormInput) {
+    fn ? fn(data) : console.log(data);
   }
   return (
     <form>
