@@ -17,9 +17,9 @@ The Password Validator app is a simple React application that allows you to vali
 
 The PasswordValidator component can be used to integrate password validation into your application. It accepts the following props:
 
-- `requirements` (optional): An array of requirements that the password should meet. You can use the `requirementKeys` object for predefined requirement keys (recommended for a better developer experience). Example:
+- `requirements`: An array of requirements that the password should meet. You can use the `requirementKeys` object for predefined requirement keys (recommended for a better developer experience). Example:
 
-  ```jsx
+  ```js
   <PasswordValidator
     requirements={[
       requirementKeys.required,
@@ -32,7 +32,19 @@ The PasswordValidator component can be used to integrate password validation int
       console.log('Validated password data', data);
     }}
   />
-  
+
+Alternatively, if you prefer not to dynamically generate requirementKeys, you have the option to manually specify them as shown below:
+```js
+const reqMap = {
+  required: 'required',
+  digits: 'digits',
+  specialChars: 'specialChars',
+  uppercaseLetter: 'uppercaseLetter',
+  noConsecutiveLetters: 'noConsecutiveLetters',
+}
+```
+This approach allows you to either use the dynamically generated requirementKeys or manually define the requirement keys based on your preference.
+
 ### `fn` (optional)
 
 A callback function that receives the validated password data. You can specify a custom function to handle the data once it's validated.
@@ -80,11 +92,22 @@ The app follows a modular folder structure for better code organization:
 
 The app relies on the following dependencies:
 
-- React: A JavaScript library for building user interfaces.
+- Next.js: A popular React framework for building server-rendered web applications.
 - Chakra UI: A simple, modular, and accessible component library for building user interfaces.
 - React Hook Form: A library for managing form state and validation in React applications.
 - Yup: A JavaScript schema builder for value parsing and validation.
 
-### Conclusion
+## Conclusion
 
 The Password Validator app simplifies the process of validating passwords against various requirements and provides real-time feedback to users. By using predefined requirement keys and a modular folder structure, it promotes code readability and maintainability. You can easily integrate this component into your applications to enhance password security.
+
+
+## Deployment
+
+The Password Validator app is deployed and accessible online. You can try it out by visiting the following link:
+
+[Password Validator App](https://qventus-takehome.vercel.app/)
+
+### Deployment Details
+
+The app is deployed using [Vercel](https://vercel.com/), a popular platform for hosting web applications.
