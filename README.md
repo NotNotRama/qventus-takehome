@@ -95,7 +95,6 @@ The app relies on the following dependencies:
 - Next.js: A popular React framework for building server-rendered web applications.
 - Chakra UI: A simple, modular, and accessible component library for building user interfaces.
 - React Hook Form: A library for managing form state and validation in React applications.
-- Yup: A JavaScript schema builder for value parsing and validation.
 
 ## Conclusion
 
