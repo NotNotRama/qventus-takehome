@@ -1,11 +1,12 @@
 import PasswordValidator from '@/components/PasswordValidator';
+import { requirementKeys } from '@/utils/requirementsKeys';
 
 export default function Home() {
   return (
     <>
       <PasswordValidator
         requirements={[
-          'required',
+          requirementKeys.required,
           'digits',
           'specialChars',
           'uppercaseLetter',
