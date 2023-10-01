@@ -1,40 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Password Validator App
 
-## Getting Started
+The Password Validator app is a simple React application that allows you to validate a password based on various requirements and provides real-time feedback to the user. It can be used as a component in your larger applications to ensure that user passwords meet specific criteria.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Validates passwords against multiple requirements, such as:
+  - Being required (cannot be empty)
+  - Containing digits (0-9)
+  - Having special characters (!@#$%^&*)
+  - Containing at least one uppercase letter
+  - Not having consecutive letters (e.g., "aa" or "Aa")
+
+## Usage
+
+### PasswordValidator Component
+
+The PasswordValidator component can be used to integrate password validation into your application. It accepts the following props:
+
+- `requirements` (optional): An array of requirements that the password should meet. You can use the `requirementKeys` object for predefined requirement keys (recommended for a better developer experience). Example:
+
+  ```jsx
+  <PasswordValidator
+    requirements={[
+      requirementKeys.required,
+      requirementKeys.digits,
+      requirementKeys.specialChars,
+      requirementKeys.uppercaseLetter,
+      requirementKeys.noConsecutiveLetters,
+    ]}
+    fn={(data) => {
+      console.log('Validated password data', data);
+    }}
+  />
+  
+### `fn` (optional)
+
+A callback function that receives the validated password data. You can specify a custom function to handle the data once it's validated.
+
+### CustomCheck Component
+
+The `CustomCheck` component is used internally by the `PasswordValidator` component to display validation feedback. It accepts the following props:
+
+- `children`: React node (usually "X" or "✔") to display inside the checkmark box.
+- `color`: The background color of the checkmark box, which can be used to represent success or failure.
+
+### Implementation Details
+
+#### Validation Rules
+
+The `PasswordValidator` component defines validation rules for each requirement. These rules are defined in the `validationFunctions` object and include functions like `required`, `digits`, `specialChars`, `uppercaseLetter`, and `noConsecutiveLetters`. These functions check whether the password meets the corresponding requirement.
+
+#### Dynamic Requirement Keys
+
+To improve the developer experience, the app provides the `requirementKeys` object, which dynamically generates requirement keys based on the `requirementsMap`. This allows you to use predefined keys for requirements, making your code more readable and less error-prone.
+
+Example usage of `requirementKeys`:
+
+```jsx
+<PasswordValidator
+  requirements={[
+    requirementKeys.required,
+    requirementKeys.digits,
+    // ...
+  ]}
+/>
 ```
+### Real-time Feedback
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The `PasswordValidator` component provides real-time feedback to the user as they type their password. It checks the password against the specified requirements and displays either a red "X" or a green checkmark based on whether the requirement is met.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Folder Structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The app follows a modular folder structure for better code organization:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `components`: Contains the React components, including `PasswordValidator` and `CustomCheck`.
+- `utils`: Contains utility functions and objects, including `requirementsMap` and `requirementKeys`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Dependencies
 
-## Learn More
+The app relies on the following dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+- React: A JavaScript library for building user interfaces.
+- Chakra UI: A simple, modular, and accessible component library for building user interfaces.
+- React Hook Form: A library for managing form state and validation in React applications.
+- Yup: A JavaScript schema builder for value parsing and validation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Conclusion
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The Password Validator app simplifies the process of validating passwords against various requirements and provides real-time feedback to users. By using predefined requirement keys and a modular folder structure, it promotes code readability and maintainability. You can easily integrate this component into your applications to enhance password security.
