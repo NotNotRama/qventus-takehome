@@ -5,7 +5,6 @@ The Password Validator app is a simple React application that allows you to vali
 ## Features
 
 - Validates passwords against multiple requirements, such as:
-  - Being required (cannot be empty)
   - Containing digits (0-9)
   - Having special characters (!@#$%^&*)
   - Containing at least one uppercase letter
@@ -22,7 +21,6 @@ The PasswordValidator component can be used to integrate password validation int
   ```js
   <PasswordValidator
     requirements={[
-      requirementKeys.required,
       requirementKeys.digits,
       requirementKeys.specialChars,
       requirementKeys.uppercaseLetter,
@@ -36,7 +34,6 @@ The PasswordValidator component can be used to integrate password validation int
 Alternatively, if you prefer not to dynamically generate requirementKeys, you have the option to manually specify them as shown below:
 ```js
 const reqMap = {
-  required: 'required',
   digits: 'digits',
   specialChars: 'specialChars',
   uppercaseLetter: 'uppercaseLetter',
@@ -60,7 +57,7 @@ The `CustomCheck` component is used internally by the `PasswordValidator` compon
 
 #### Validation Rules
 
-The `PasswordValidator` component defines validation rules for each requirement. These rules are defined in the `validationFunctions` object and include functions like `required`, `digits`, `specialChars`, `uppercaseLetter`, and `noConsecutiveLetters`. These functions check whether the password meets the corresponding requirement.
+The `PasswordValidator` component defines validation rules for each requirement. These rules are defined in the `validationFunctions` object and include functions like `digits`, `specialChars`, `uppercaseLetter`, and `noConsecutiveLetters`. These functions check whether the password meets the corresponding requirement.
 
 #### Dynamic Requirement Keys
 
@@ -71,8 +68,8 @@ Example usage of `requirementKeys`:
 ```jsx
 <PasswordValidator
   requirements={[
-    requirementKeys.required,
     requirementKeys.digits,
+    requirementKeys.specialChars,
     // ...
   ]}
 />
