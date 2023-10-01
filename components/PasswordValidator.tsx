@@ -74,11 +74,12 @@ export default function PasswordValidator({
           <Box pl={4}>
             {requirements.map((requirement, index) => {
               // Check if the input value meets the current requirement
-              const isValid = validationRules[requirement](inputValue);
+              const isRequirementValid =
+                validationRules[requirement](inputValue);
 
               return (
                 <Flex key={index} flexDir="row">
-                  {!isValid || !inputValue ? (
+                  {!isRequirementValid || !inputValue ? (
                     // Display a red "X" if the requirement is not met
                     <CustomCheck color={'red'}>X</CustomCheck>
                   ) : (
