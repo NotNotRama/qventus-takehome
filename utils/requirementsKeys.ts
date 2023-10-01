@@ -1,6 +1,7 @@
 import { Keys } from '@/types/formTypes';
 import { requirementsMap } from '@/utils/requirementsMap';
 
+// Utility function to generate keys from requirementsMap
 function keys<T extends Record<PropertyKey, unknown>>(o: T): Keys<T> {
   return Object.fromEntries(Object.keys(o).map((k) => [k, k])) as Keys<T>;
 }

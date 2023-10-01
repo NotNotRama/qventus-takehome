@@ -1,3 +1,4 @@
+// Define a map of password requirements and their descriptions
 export const requirementsMap = {
   required: 'Required',
   digits: 'Has a number 0-9',

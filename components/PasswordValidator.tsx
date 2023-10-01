@@ -10,15 +10,19 @@ export default function PasswordValidator({
   requirements = [],
   fn,
 }: {
-  requirements?: (keyof typeof requirementsMap)[];
+  requirements: (keyof typeof requirementsMap)[];
   fn?: Function;
 }) {
+  // Initialize the form control using react-hook-form
   const { register, handleSubmit, watch } = useForm<FormInput>({
     criteriaMode: 'all',
     mode: 'onChange',
   });
+
+  // Get the current value of the input field
   const inputValue = watch('input');
 
+  // Define validation rules and functions for password requirements
   const validationRules: ValidationRules = {};
 
   const validationFunctions: Record<string, (value: string) => boolean> = {
@@ -29,12 +33,14 @@ export default function PasswordValidator({
     noConsecutiveLetters: (value) => !/([a-zA-Z])\1/i.test(value),
   };
 
+  // Populate the validation rules based on specified requirements
   requirements.forEach((requirement) => {
     if (validationFunctions[requirement]) {
       validationRules[requirement] = validationFunctions[requirement];
     }
   });
 
+  // Handle Enter key press for form submission
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -42,9 +48,11 @@ export default function PasswordValidator({
     }
   }
 
+  // Handle form submission, calling the provided callback function if available
   function onSubmit(data: FormInput) {
     fn ? fn(data) : console.log(data);
   }
+
   return (
     <form>
       <Flex flexDirection="column">
@@ -65,13 +73,16 @@ export default function PasswordValidator({
           </Box>
           <Box pl={4}>
             {requirements.map((requirement, index) => {
+              // Check if the input value meets the current requirement
               const isValid = validationRules[requirement](inputValue);
 
               return (
                 <Flex key={index} flexDir="row">
                   {!isValid || !inputValue ? (
+                    // Display a red "X" if the requirement is not met
                     <CustomCheck color={'red'}>X</CustomCheck>
                   ) : (
+                    // Display a green checkmark if the requirement is met
                     <CustomCheck color={'green'}>✔</CustomCheck>
                   )}
                   <Text pl={2}>{requirementsMap[requirement]}</Text>
