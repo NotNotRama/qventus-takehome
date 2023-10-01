@@ -69,7 +69,6 @@ export default function PasswordValidator({
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      console.log('Enter pressed');
       handleSubmit(onSubmit)();
     }
   }
@@ -88,9 +87,7 @@ export default function PasswordValidator({
           <Box pr={4}>
             <Input
               {...register('input', {
-                validate: {
-                  required: (value) => !!value,
-                },
+                validate: validationRules,
               })}
               size="sm"
               onKeyDown={handleKeyDown}
