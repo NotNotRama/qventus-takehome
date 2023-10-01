@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Input } from '@chakra-ui/react';
+import { Box, Flex, Heading, Input, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 type FormInput = {
@@ -6,6 +6,36 @@ type FormInput = {
 };
 
 export type ValidationRules = Record<string, (value: string) => boolean>;
+
+function CustomCheck({
+  children,
+  color,
+}: {
+  children: React.ReactNode;
+  color: string;
+}) {
+  return (
+    <Box
+      w="23px"
+      h="23px"
+      borderRadius="50%"
+      bgColor={color}
+      color="white"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Text fontSize="xs">{children}</Text>
+    </Box>
+  );
+}
+const requirementsMap: any = {
+  required: 'Required',
+  digits: 'Has a number 0-9',
+  specialChars: 'Has a special char !@#$%^&*',
+  uppercaseLetter: 'Has uppercase letter',
+  noConsecutiveLetters: 'Has no consecutive letters',
+};
 
 export default function PasswordValidator({
   requirements = [],
@@ -59,6 +89,22 @@ export default function PasswordValidator({
               onKeyDown={handleKeyDown}
               border="1px solid black"
             />
+          </Box>
+          <Box pl={4}>
+            {requirements.map((requirement, index) => {
+              const isValid = validationRules[requirement](inputValue);
+
+              return (
+                <Flex key={index} flexDir="row">
+                  {!isValid || !inputValue ? (
+                    <CustomCheck color={'red'}>X</CustomCheck>
+                  ) : (
+                    <CustomCheck color={'green'}>✔</CustomCheck>
+                  )}
+                  <Text pl={2}>{requirementsMap[requirement]}</Text>
+                </Flex>
+              );
+            })}
           </Box>
         </Flex>
       </Flex>
