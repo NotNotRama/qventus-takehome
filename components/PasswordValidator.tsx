@@ -7,7 +7,7 @@ import CustomCheck from './CustomCheck';
 export type ValidationRules = Record<string, (value: string) => boolean>;
 
 export default function PasswordValidator({
-  requirements = [],
+  requirements,
   fn,
 }: {
   requirements: (keyof typeof requirementsMap)[];
@@ -26,7 +26,6 @@ export default function PasswordValidator({
   const validationRules: ValidationRules = {};
 
   const validationFunctions: Record<string, (value: string) => boolean> = {
-    required: (value) => !!value,
     digits: (value) => !!(value && /\d/.test(value)),
     specialChars: (value) => !!(value && /[!@#$%^&*]/.test(value)),
     uppercaseLetter: (value) => !!(value && /[A-Z]/.test(value)),
@@ -44,6 +43,7 @@ export default function PasswordValidator({
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       e.preventDefault();
+      if (requirements.length === 0) return;
       handleSubmit(onSubmit)();
     }
   }

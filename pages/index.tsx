@@ -7,8 +7,7 @@ export default function Home() {
       <PasswordValidator
         // Pass an array of password requirements using requirementKeys for readability
         requirements={[
-          requirementKeys.required,
-          'digits',
+          requirementKeys.digits,
           'specialChars',
           'uppercaseLetter',
           'noConsecutiveLetters',
