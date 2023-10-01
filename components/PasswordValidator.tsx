@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Input, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
+import { requirementsMap } from '@/utils/requirementsMap';
 
 type FormInput = {
   input: string;
@@ -29,13 +30,6 @@ function CustomCheck({
     </Box>
   );
 }
-const requirementsMap = {
-  required: 'Required',
-  digits: 'Has a number 0-9',
-  specialChars: 'Has a special char !@#$%^&*',
-  uppercaseLetter: 'Has uppercase letter',
-  noConsecutiveLetters: 'Has no consecutive letters',
-} as const;
 
 export default function PasswordValidator({
   requirements = [],
