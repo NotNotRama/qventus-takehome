@@ -29,18 +29,18 @@ function CustomCheck({
     </Box>
   );
 }
-const requirementsMap: any = {
+const requirementsMap = {
   required: 'Required',
   digits: 'Has a number 0-9',
   specialChars: 'Has a special char !@#$%^&*',
   uppercaseLetter: 'Has uppercase letter',
   noConsecutiveLetters: 'Has no consecutive letters',
-};
+} as const;
 
 export default function PasswordValidator({
   requirements = [],
 }: {
-  requirements?: string[];
+  requirements?: (keyof typeof requirementsMap)[];
 }) {
   const { register, handleSubmit, watch } = useForm<FormInput>({
     criteriaMode: 'all',
