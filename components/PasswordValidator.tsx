@@ -67,6 +67,7 @@ export default function PasswordValidator({
               size="sm"
               onKeyDown={handleKeyDown}
               border="1px solid black"
+              type="password"
             />
           </Box>
           <Box pl={4}>
