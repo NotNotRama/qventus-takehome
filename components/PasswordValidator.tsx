@@ -1,10 +1,8 @@
 import { Box, Flex, Heading, Input, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { requirementsMap } from '@/utils/requirementsMap';
-import { FormInput } from '@/types/formTypes';
+import { FormInput, ValidationRules } from '@/types/formTypes';
 import CustomCheck from './CustomCheck';
-
-export type ValidationRules = Record<string, (value: string) => boolean>;
 
 export default function PasswordValidator({
   requirements,
